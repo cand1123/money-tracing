@@ -1,0 +1,92 @@
+{
+  "app": {
+    "name": "Model",
+    "version": "1.0",
+    "description": "Sistem Pencatatan Keuangan"
+  },
+  "defaultBanks": [
+    {
+      "id": "bca",
+      "name": "BCA",
+      "balance": 0,
+      "color": "text-blue-600",
+      "icon": "fa-building-columns",
+      "accountNumber": ""
+    },
+    {
+      "id": "mandiri",
+      "name": "Mandiri",
+      "balance": 0,
+      "color": "text-yellow-500",
+      "icon": "fa-building-columns",
+      "accountNumber": ""
+    },
+    {
+      "id": "jago",
+      "name": "Jago",
+      "balance": 0,
+      "color": "text-orange-500",
+      "icon": "fa-wallet",
+      "accountNumber": ""
+    },
+    {
+      "id": "cash",
+      "name": "Tunai",
+      "balance": 0,
+      "color": "text-green-600",
+      "icon": "fa-money-bill",
+      "accountNumber": ""
+    }
+  ],
+  "categories": {
+    "income": [
+      {
+        "id": "gaji",
+        "name": "Gaji"
+      },
+      {
+        "id": "bonus",
+        "name": "Bonus/Komisi"
+      },
+      {
+        "id": "usaha",
+        "name": "Usaha/Sampingan"
+      },
+      {
+        "id": "transfer-masuk",
+        "name": "Transfer Masuk"
+      }
+    ],
+    "expense": [
+      {
+        "id": "makanan",
+        "name": "Makanan & Minuman"
+      },
+      {
+        "id": "transportasi",
+        "name": "Transportasi"
+      },
+      {
+        "id": "tagihan",
+        "name": "Tagihan Rutin"
+      },
+      {
+        "id": "belanja",
+        "name": "Belanja Harian"
+      },
+      {
+        "id": "kesehatan",
+        "name": "Kesehatan"
+      },
+      {
+        "id": "cicilan",
+        "name": "Cicilan"
+      },
+      {
+        "id": "rumah-tangga",
+        "name": "Kebutuhan Rumah Tangga"
+      }
+    ]
+  }
+}
+
