@@ -1,0 +1,10 @@
+[build]
+  # Aplikasi ini adalah HTML statis, tidak memerlukan build process
+  command = "echo 'Static site - no build needed' && exit 0"
+  publish = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+

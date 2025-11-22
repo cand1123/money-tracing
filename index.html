@@ -2,7 +2,9 @@
 <html lang="id" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#1f2937">
     <title>CanTrack</title>
     <!-- Favicon and App Icons -->
     <link rel="icon" type="image/png" href="img.png">
@@ -60,7 +62,54 @@
         window.firebaseOff = off;
     </script>
     <style>
-        body { overscroll-behavior-y: contain; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', sans-serif; }
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        body { 
+            overscroll-behavior-y: contain; 
+            -webkit-tap-highlight-color: transparent; 
+            font-family: 'Segoe UI', sans-serif;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Responsive width adjustment */
+        #login-page, #main-app {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 428px) {
+            #login-page, #main-app {
+                max-width: 428px;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            #login-page, #main-app {
+                max-width: 100%;
+            }
+        }
+        
+        /* Safe area untuk iPhone dengan notch */
+        @supports (padding: max(0px)) {
+            #login-page, #main-app {
+                padding-left: max(0px, env(safe-area-inset-left));
+                padding-right: max(0px, env(safe-area-inset-right));
+            }
+        }
+        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .fade-in { animation: fadeIn 0.3s ease-in-out; }
@@ -69,10 +118,10 @@
         .inactive-tab { color: #6b7280; }
     </style>
 </head>
-<body class="bg-gray-900 h-screen flex justify-center text-gray-100">
+<body class="bg-gray-900 h-screen text-gray-100" style="display: flex; justify-content: center; align-items: flex-start; width: 100%; overflow-x: hidden;">
 
     <!-- Login Page -->
-    <div id="login-page" class="w-full max-w-md bg-gray-800 h-full flex flex-col shadow-2xl relative overflow-hidden">
+    <div id="login-page" class="w-full bg-gray-800 h-full flex flex-col shadow-2xl relative overflow-hidden" style="max-width: 100%;">
         <div class="flex-1 flex items-center justify-center px-6">
             <div class="w-full text-center space-y-6">
                 <div class="space-y-3">
@@ -106,7 +155,7 @@
     </div>
 
     <!-- Main App -->
-    <div id="main-app" class="hidden w-full max-w-md bg-gray-800 h-full flex flex-col shadow-2xl relative overflow-hidden">
+    <div id="main-app" class="hidden w-full bg-gray-800 h-full flex flex-col shadow-2xl relative overflow-hidden" style="max-width: 100%;">
 
         <header class="bg-gray-800 px-5 py-4 flex justify-between items-center shadow-sm shadow-gray-900/50 z-20 border-b border-gray-700">
             <div class="flex items-center gap-2">
@@ -1604,8 +1653,51 @@
             }
         }
 
+        // --- RESPONSIVE WIDTH ADJUSTMENT ---
+        function adjustWidthForDevice() {
+            const loginPage = document.getElementById('login-page');
+            const mainApp = document.getElementById('main-app');
+            const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+            
+            // Set width sesuai dengan device
+            if (loginPage) {
+                loginPage.style.width = '100%';
+                loginPage.style.maxWidth = '100%';
+            }
+            
+            if (mainApp) {
+                mainApp.style.width = '100%';
+                mainApp.style.maxWidth = '100%';
+            }
+            
+            // Untuk device yang lebih besar dari 428px, tetap max 428px
+            if (viewportWidth > 428) {
+                if (loginPage) loginPage.style.maxWidth = '428px';
+                if (mainApp) mainApp.style.maxWidth = '428px';
+            }
+            
+            // Set body width untuk mencegah horizontal scroll
+            document.body.style.width = '100%';
+            document.body.style.overflowX = 'hidden';
+            
+            // Set html width
+            document.documentElement.style.width = '100%';
+            document.documentElement.style.overflowX = 'hidden';
+        }
+        
+        // Handle orientation change dan resize
+        window.addEventListener('resize', adjustWidthForDevice);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(adjustWidthForDevice, 100);
+        });
+        
+        // Set initial width on load
+        window.addEventListener('load', adjustWidthForDevice);
+        window.addEventListener('DOMContentLoaded', adjustWidthForDevice);
+
         // --- INIT ON LOAD ---
         moment.locale('id');
+        adjustWidthForDevice();
         checkAuth();
 
     </script>

@@ -1,0 +1,17 @@
+{
+  "name": "cantrack",
+  "version": "1.0.0",
+  "description": "Aplikasi pencatatan keuangan CanTrack",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build required - static HTML site'"
+  },
+  "keywords": [
+    "finance",
+    "tracking",
+    "keuangan"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+
